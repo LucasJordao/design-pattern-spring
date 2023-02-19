@@ -1,6 +1,6 @@
 package com.lucas.design.pattern.designpattern.patterns.criacionais.abstractFactory;
 
-public class PizzaQueijo extends PizzaFactory{
+public class PizzaQueijo implements PizzaFactory{
 
     @Override
     public String criarRecheio() {

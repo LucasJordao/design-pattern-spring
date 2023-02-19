@@ -7,6 +7,9 @@ import com.lucas.design.pattern.designpattern.patterns.criacionais.abstractFacto
 import com.lucas.design.pattern.designpattern.patterns.criacionais.builder.Builder;
 import com.lucas.design.pattern.designpattern.patterns.criacionais.factorymethod.PixFactory;
 import com.lucas.design.pattern.designpattern.patterns.criacionais.factorymethod.TransferFactory;
+import com.lucas.design.pattern.designpattern.patterns.criacionais.prototype.Animal;
+import com.lucas.design.pattern.designpattern.patterns.criacionais.prototype.Cachorro;
+import com.lucas.design.pattern.designpattern.patterns.criacionais.singleton.Database;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +51,24 @@ class PadroesCriacionais {
         pizzaFinal.setRecheio(pizzaFactory.criarRecheio());
 
         return ResponseEntity.ok(pizzaFinal);
+    }
+
+    @GetMapping("/prototype")
+    public ResponseEntity<?> prototypeDesign(){
+        Animal cachorro1 = new Cachorro();
+        cachorro1.setCor("marrom");
+        Animal cachorro2 = cachorro1.clone();
+
+        return ResponseEntity.ok(cachorro2);
+    }
+
+    @GetMapping("/singleton")
+    public ResponseEntity<?> singletonDesign(){
+        Database database = Database.getInstance();
+        Database database1 = Database.getInstance();
+        System.out.println(database.getDatabaseConection());
+        System.out.println(database1.getDatabaseConection());
+        return ResponseEntity.ok(database.getDatabaseConection());
     }
 
 }
